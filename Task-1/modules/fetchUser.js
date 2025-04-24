@@ -33,15 +33,19 @@ const USER_DATA = [
 
 export const getUserData = (userId) => {
     return new Promise((resolve, reject) => {
-        console.log('Getting user data...')
+        console.log(`Start fetching User ID - ${userId}`);
+        if(userId <= 0)
+            reject('User ID can not be equal or smaller than 0, try again...');
+
         setTimeout(()=>{
             let responseUser = USER_DATA.find(user => user.id == userId);
+            console.log(`Finished fetching User ID - ${userId}`);
 
             //if user found else continue
             if(responseUser)
                 resolve(JSON.stringify(responseUser, null, 4));
 
-            reject('No user has been found with such id, returned value is ' + String(responseUser));
+            reject(`No user has been found with id value of ${userId}, output user value: ` + String(responseUser));
         }, 2000);
     });
 }

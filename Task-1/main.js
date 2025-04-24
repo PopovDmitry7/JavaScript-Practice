@@ -5,7 +5,7 @@ function getSingleUser() {
 
     getUserData(userId)
         .then((userData) => {
-            const resultSpan = document.getElementById('resultSpan');
+            const resultSpan = document.getElementById('result_span');
             resultSpan.textContent = userData;
             resultSpan.style.display = 'inline';
         })
@@ -15,21 +15,25 @@ function getSingleUser() {
 }
 
 function getMultipleUsers() {
-    const arrUserIdSpan = document.getElementById('text_users_id');
-    const arrUserId = arrUserIdSpan.value.replace(/\s+/g, '').split(',');
-    console.log(arrUserId);
+    const stringUserId = document.getElementById('text_users_id');
+    const arrayUserId = stringUserId.value.replace(/\s+/g, '').split(',');
 
     //getting array of promises to be used together in the Promise.all
-    let concomitentPromises = arrUserId.map(id => getUserData(Number(id)));
+    let concomitentPromises = arrayUserId.map(id => getUserData(Number(id)));
 
-    Promise.all(concomitentPromises).then((values) => {
-        let resultText = '';
-        values.forEach(userData => {
-            resultText += userData;
+    Promise.all(concomitentPromises)
+        .then((values) => {
+            let resultText = '';
+            values.forEach(userData => {
+                resultText += userData;
+            });
+            const multipleResultSpan = document.getElementById('multiple_result_span');
+            multipleResultSpan.textContent = resultText + '\n';
+            multipleResultSpan.style.display = 'inline';
+        })
+        .catch((errorMessage) => {
+            alert(errorMessage);
         });
-        arrUserIdSpan.textContent = resultText;
-        arrUserIdSpan.style.display = 'inline';
-      });
 }
 
 window.getSingleUser = getSingleUser;

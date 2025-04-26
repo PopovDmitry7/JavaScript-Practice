@@ -1,0 +1,46 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 20rem;
+  padding: 1rem;
+  gap: 5px;
+}
+
+button{
+    width: 16rem;
+    height: 2rem;
+}
+
+#taskInput{
+    width: 16rem;
+}
+
+#taskList {
+  width: 100%;
+  margin: 0;
+  padding-left: 0;
+  list-style-position: inside;
+  text-align: left;
+}
+
+#taskCount{
+    font-size: 1rem;
+    text-decoration: underline;
+    text-align: left;
+}
+
+#taskDescriptionInput{
+    resize: vertical;
+}
